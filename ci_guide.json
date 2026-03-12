@@ -1,0 +1,127 @@
+{
+    "colorScheme": "light",
+    "fonts": [
+        {
+            "family": "GT-Walsheim-Pro",
+            "role": "body"
+        }
+    ],
+    "colors": {
+        "primary": "#69727D",
+        "accent": "#113BD2",
+        "background": "#FFFFFF",
+        "textPrimary": "#113BD2",
+        "link": "#113BD2"
+    },
+    "typography": {
+        "fontFamilies": {
+            "primary": "GT-Walsheim-Pro",
+            "heading": "GT-Walsheim-Pro"
+        },
+        "fontStacks": {
+            "heading": [
+                "GT-Walsheim-Pro",
+                "sans-serif"
+            ],
+            "body": [
+                "GT-Walsheim-Pro",
+                "sans-serif"
+            ],
+            "paragraph": [
+                "GT-Walsheim-Pro",
+                "sans-serif"
+            ]
+        },
+        "fontSizes": {
+            "h1": "62px",
+            "h2": "20px",
+            "body": "18px"
+        }
+    },
+    "spacing": {
+        "baseUnit": 4,
+        "borderRadius": "3px"
+    },
+    "components": {
+        "buttonPrimary": {
+            "background": "#113BD2",
+            "textColor": "#FAFAFA",
+            "borderRadius": "35px",
+            "borderRadiusCorners": {
+                "topLeft": "35px",
+                "topRight": "35px",
+                "bottomRight": "35px",
+                "bottomLeft": "35px"
+            },
+            "shadow": "none"
+        },
+        "buttonSecondary": {
+            "background": "transparent",
+            "textColor": "#113BD2",
+            "borderColor": "#113BD2",
+            "borderRadius": "50px",
+            "borderRadiusCorners": {
+                "topLeft": "50px",
+                "topRight": "50px",
+                "bottomRight": "50px",
+                "bottomLeft": "50px"
+            },
+            "shadow": "none"
+        }
+    },
+    "images": {
+        "logo": "https://entityx.com/wp-content/uploads/2023/11/Group-202.svg",
+        "favicon": "https://entityx.com/wp-content/uploads/2024/02/cropped-Favicon-WhiteonBlack-512px-32x32.png",
+        "ogImage": "https://entityx.com/wp-content/uploads/2024/03/strategy.png.webp"
+    },
+    "__llm_logo_reasoning": {
+        "selectedIndex": 0,
+        "reasoning": "Logo rejected: Red flags detected (external link). Selected #0 because it is visible, located in the header, links to the homepage, and matches the brand inferred from the page title and URL.",
+        "confidence": 0.9,
+        "rejected": true,
+        "source": "llm"
+    },
+    "__llm_button_reasoning": {
+        "primary": {
+            "index": 1,
+            "text": "Jetzt Kontakt aufnehmen",
+            "reasoning": "Button #1 ('Jetzt Kontakt aufnehmen') is selected as the primary CTA due to its vibrant blue background (#113BD2), which is the brand color, and its action-oriented text encouraging contact."
+        },
+        "secondary": {
+            "index": 9,
+            "text": "Mehr Erfahren",
+            "reasoning": "Button #9 ('Mehr Erfahren') is selected as the secondary CTA because it has a transparent background, providing a contrast to the primary button's vibrant color, and offers additional information."
+        },
+        "confidence": 0.95
+    },
+    "personality": {
+        "tone": "professional",
+        "energy": "medium",
+        "targetAudience": "businesses seeking digital marketing and strategy consulting"
+    },
+    "designSystem": {
+        "framework": "custom",
+        "componentLibrary": ""
+    },
+    "confidence": {
+        "buttons": 0.95,
+        "colors": 0.9,
+        "overall": 0.925
+    },
+    "__llm_metadata": {
+        "logoSelection": {
+            "llmCalled": true,
+            "llmSucceeded": true,
+            "finalSource": "llm",
+            "rawLogoSelection": {
+                "selectedLogoIndex": 0,
+                "selectedLogoReasoning": "Selected #0 because it is visible, located in the header, links to the homepage, and matches the brand inferred from the page title and URL.",
+                "confidence": 0.9
+            }
+        },
+        "buttonClassification": {
+            "llmCalled": true,
+            "llmSucceeded": true
+        }
+    }
+}

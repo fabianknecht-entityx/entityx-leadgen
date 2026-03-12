@@ -1,0 +1,71 @@
+@import "tailwindcss";
+
+:root {
+  --background: #F0F4FA;
+  --foreground: #0F172A;
+
+  /* Brand colors */
+  --accent: #2563EB;
+  --accent-hover: #1D4ED8;
+  --accent-muted: rgba(37, 99, 235, 0.10);
+
+  /* Score gauge colors */
+  --score-red: #EF4444;
+  --score-orange: #F59E0B;
+  --score-yellow-green: #84CC16;
+  --score-green: #22C55E;
+
+  /* Surface colors */
+  --surface: #FFFFFF;
+  --surface-elevated: #E8EEF6;
+  --border: rgba(15, 23, 42, 0.10);
+
+  /* Text */
+  --text-primary: #0F172A;
+  --text-secondary: #475569;
+  --text-muted: #94A3B8;
+
+  /* Radius */
+  --radius-card: 8px;
+  --radius-button: 35px;
+
+  /* Fonts */
+  --font-display: var(--font-playfair);
+  --font-body: var(--font-dm-sans);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-muted: var(--accent-muted);
+  --color-surface: var(--surface);
+  --color-surface-elevated: var(--surface-elevated);
+  --color-border: var(--border);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  --color-score-red: var(--score-red);
+  --color-score-orange: var(--score-orange);
+  --color-score-yellow-green: var(--score-yellow-green);
+  --color-score-green: var(--score-green);
+  --radius-card: var(--radius-card);
+  --radius-button: var(--radius-button);
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+}
+
+body {
+  background:
+    radial-gradient(circle at 1px 1px, rgba(37, 99, 235, 0.07) 0.7px, transparent 0.7px),
+    var(--background);
+  background-size: 24px 24px, auto;
+  color: var(--foreground);
+  font-family: var(--font-body), sans-serif;
+}
+
+::selection {
+  background: var(--accent);
+  color: white;
+}
