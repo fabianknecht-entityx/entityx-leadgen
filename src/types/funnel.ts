@@ -51,7 +51,7 @@ export interface FunnelStep {
 export interface ContactField {
   id: string;
   label: string;
-  type: "text" | "email" | "tel" | "dropdown";
+  type: "text" | "email" | "tel" | "tel_with_code" | "dropdown";
   required: boolean;
   placeholder?: string;
   sublabel?: string;
@@ -77,6 +77,7 @@ export interface FunnelAnswers {
   company: string;
   email: string;
   phone?: string;
+  phone_code?: string;
   industry: string;
 }
 

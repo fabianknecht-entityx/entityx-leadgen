@@ -36,7 +36,7 @@ export const FUNNEL_STEPS: FunnelStep[] = [
     type: "interstitial",
     stat_number: "79%",
     stat_label: "aller Marketing-Leads werden nie zu Kunden",
-    body: "Nicht weil die Ads schlecht sind – sondern weil zwischen Klick und Abschluss zu viel verloren geht. Dein Lead-Gen-Score zeigt dir in 2 Minuten, wo genau dein System Geld verbrennt.",
+    body: "Nicht weil die Ads schlecht sind – sondern weil zwischen Klick und Abschluss zu viele Interessenten verloren gehen. Fehlende Prozesse, langsame Reaktionszeiten und mangelnde Qualifizierung kosten Unternehmen systematisch Umsatz. Diese Analyse zeigt dir in 2 Minuten, wo genau dein System Potenzial liegen lässt.",
     source: "Quelle: MarketingSherpa / ZoomInfo Research",
     cta_button: "Weiter",
   },
@@ -84,16 +84,11 @@ export const FUNNEL_STEPS: FunnelStep[] = [
     id: "funnel_maturity_active",
     type: "single_select",
     path_filter: "active",
-    question: "Was passiert, nachdem jemand auf deine Ad oder dein Angebot klickt?",
+    question: "Wie sieht der Prozess aus, nachdem ein Interessent auf deine Ad oder dein Angebot reagiert?",
     options: [
+      { id: "no_process", label: "Kein definierter Prozess nach dem Klick", score_funnel: 0 },
       { id: "website_direct", label: "Direkt auf unsere Website oder Kontaktseite", score_funnel: 3 },
-      { id: "landing_page", label: "Eigene Landing Page", score_funnel: 8 },
-      {
-        id: "lp_followup",
-        label: "Landing Page + automatisiertes Follow-up",
-        sublabel: "E-Mail, WhatsApp oder SMS",
-        score_funnel: 14,
-      },
+      { id: "lp_followup", label: "Landing Page mit Follow-up (E-Mail, WhatsApp o.ä.)", score_funnel: 14 },
       { id: "multi_step", label: "Mehrstufiger Funnel mit Vorqualifizierung", score_funnel: 20 },
       { id: "segmented", label: "Verschiedene Funnels für verschiedene Zielgruppen", score_funnel: 25 },
     ],
@@ -106,18 +101,19 @@ export const FUNNEL_STEPS: FunnelStep[] = [
     path_filter: "starter",
     question: "Wie sieht aktuell dein Weg vom Interessenten zum Kunden aus?",
     options: [
+      { id: "no_process", label: "Wir haben aktuell keinen definierten Prozess", score_funnel: 0 },
       {
         id: "referrals_only",
-        label: "Interessenten kommen über Empfehlungen, wir sprechen direkt",
-        score_funnel: 4,
-      },
-      { id: "website_form", label: "Wir haben eine Website mit Kontaktformular", score_funnel: 5 },
-      {
-        id: "social_unstructured",
-        label: "Wir nutzen Social Media, aber ohne klaren Prozess",
+        label: "Interessenten kommen über Empfehlungen oder Netzwerk",
         score_funnel: 3,
       },
-      { id: "no_process", label: "Wir haben aktuell keinen definierten Prozess", score_funnel: 0 },
+      { id: "website_form", label: "Wir haben eine Website mit Kontaktformular", score_funnel: 5 },
+      { id: "lp_manual", label: "Eigene Landing Page mit manuellem Follow-up", score_funnel: 8 },
+      {
+        id: "lp_automated",
+        label: "Landing Page mit automatisiertem Follow-up (E-Mail, WhatsApp o.ä.)",
+        score_funnel: 12,
+      },
     ],
   },
 
@@ -125,10 +121,10 @@ export const FUNNEL_STEPS: FunnelStep[] = [
   {
     id: "interstitial_2",
     type: "interstitial",
-    stat_number: "67%",
-    stat_label: "effektiver beim Closing",
-    body: "Unternehmen mit verzahntem Marketing und Sales schließen 67% mehr Deals ab und sparen 30% bei der Kundenakquise. Dein Funnel endet nicht beim Lead – er beginnt dort erst.",
-    source: "Quelle: SiriusDecisions / Aberdeen Group",
+    stat_number: "32%",
+    stat_label: "schnelleres Umsatzwachstum bei verzahntem Marketing & Sales",
+    body: "Unternehmen, deren Marketing und Sales verzahnt arbeiten, wachsen 32% schneller und erzielen 36% höhere Kundenbindung. Der Funnel endet nicht beim Lead – er beginnt dort erst.",
+    source: "Quelle: Aberdeen Group",
     cta_button: "Weiter",
   },
 
@@ -229,17 +225,6 @@ export const FUNNEL_STEPS: FunnelStep[] = [
     ],
   },
 
-  // Interstitial 3 – "Speed kills (Deals)"
-  {
-    id: "interstitial_3",
-    type: "interstitial",
-    stat_number: "100×",
-    stat_label: "höhere Conversion bei Antwort unter 5 Minuten",
-    body: "Trotzdem liegt die durchschnittliche Reaktionszeit bei über 42 Stunden. 78% der Kunden kaufen beim Unternehmen, das zuerst antwortet. Die Frage ist nicht nur, wie du Leads generierst – sondern wie schnell du reagierst.",
-    source: "Quelle: Harvard Business Review / LeadResponseManagement.org",
-    cta_button: "Weiter",
-  },
-
   // Step 6a – Speed-to-Lead (Active)
   {
     id: "speed_active",
@@ -273,6 +258,17 @@ export const FUNNEL_STEPS: FunnelStep[] = [
       { id: "when_possible", label: "Wenn wir dazu kommen", score_speed: 1 },
       { id: "no_process", label: "Wir haben keinen festen Ablauf", score_speed: 0 },
     ],
+  },
+
+  // Interstitial 3 – "Speed kills (Deals)"
+  {
+    id: "interstitial_3",
+    type: "interstitial",
+    stat_number: "21×",
+    stat_label: "höhere Qualifizierungsrate bei Antwort unter 5 Minuten",
+    body: "Die durchschnittliche Reaktionszeit liegt bei über 42 Stunden – 78% der Kunden kaufen beim Anbieter, der zuerst antwortet. Wie schnell reagiert dein System?",
+    source: "Quelle: Lead Response Management Study (MIT/Kellogg)",
+    cta_button: "Weiter",
   },
 
   // Step 7a – Sales-Prozess (Active)
@@ -344,10 +340,10 @@ export const FUNNEL_STEPS: FunnelStep[] = [
   {
     id: "interstitial_4",
     type: "interstitial",
-    stat_number: "208%",
-    stat_label: "mehr Umsatz durch verzahntes Marketing & Sales",
-    body: "Lead-Generierung ist eine Kette: Targeting → Ad → Funnel → Qualifizierung → Reaktionszeit → Sales-Prozess → Follow-up → Abschluss. Jedes schwache Glied kostet dich Kunden. Die Top-Performer optimieren nicht einzelne Schritte – sie optimieren das gesamte System.",
-    source: "Quelle: Forrester / MarTech Research",
+    stat_number: "2,4×",
+    stat_label: "höheres Umsatzwachstum bei Unternehmen mit durchgängigem System",
+    body: "Targeting, Funnel, Qualifizierung, Reaktionszeit, Follow-up – jeder Baustein beeinflusst den nächsten. Die erfolgreichsten Unternehmen optimieren nicht einzelne Schritte, sondern das Zusammenspiel. Gleich siehst du, wo dein System steht.",
+    source: "Quelle: Forrester Research",
     cta_button: "Ergebnis berechnen",
   },
 
@@ -355,9 +351,9 @@ export const FUNNEL_STEPS: FunnelStep[] = [
   {
     id: "contact",
     type: "contact_form",
-    question: "Fast geschafft – dein Score wird berechnet",
-    body: "Gib deine Daten ein, um dein persönliches Ergebnis zu sehen.",
-    cta_button: "Score berechnen →",
+    question: "Deine Analyse ist abgeschlossen",
+    body: "Wir senden dir dein persönliches Ergebnis mit konkreten Handlungsempfehlungen.",
+    cta_button: "Ergebnis anzeigen",
     fields: [
       {
         id: "name",
@@ -383,10 +379,11 @@ export const FUNNEL_STEPS: FunnelStep[] = [
       {
         id: "phone",
         label: "Telefon",
-        type: "tel",
+        type: "tel_with_code",
         required: false,
-        placeholder: "+49 ...",
+        placeholder: "123 456789",
         sublabel: "Optional – für schnellere Rückmeldung",
+        options: ["DE +49", "AT +43", "CH +41"],
       },
       {
         id: "industry",

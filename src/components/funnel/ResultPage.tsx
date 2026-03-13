@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import type { ScoreResult, ScoreTier, CategoryKey } from "@/types/funnel";
 import { generateInsights } from "@/lib/insights";
@@ -20,8 +21,8 @@ const TIER_LABEL: Record<ScoreTier, string> = {
 
 const TIER_SUBTITLE: Record<ScoreTier, string> = {
   blindflug: "Dein System kostet dich jeden Tag Kunden.",
-  basis: "Dein Potenzial bleibt auf der Strecke.",
-  guter_ansatz: "Besser als die meisten. Aber da geht noch was.",
+  basis: "Es gibt messbare Lücken in deinem System.",
+  guter_ansatz: "Besser als die meisten – die letzten 20% machen den Unterschied.",
   top_performer: "Du gehörst zu den Top 10%.",
 };
 
@@ -42,9 +43,9 @@ const TIER_CTA_BODY: Record<ScoreTier, string> = {
   basis:
     "Dein System hat Potenzial – aber die Lücken kosten dich täglich Kunden. Lass uns in 30 Minuten die 2–3 Hebel identifizieren, die bei dir den größten Impact hätten.",
   guter_ansatz:
-    "Du bist nah dran am Optimum. Lass uns in 30 Minuten die 2–3 Feinschliff-Hebel identifizieren, die dein System auf das nächste Level bringen.",
+    "Du bist nah dran am Optimum. Lass uns in 30 Minuten die 2–3 Stellschrauben identifizieren, die den Unterschied zwischen gut und exzellent ausmachen.",
   top_performer:
-    "Dein Setup ist beeindruckend. Lass uns sprechen, wie wir dein System durch AI-Automatisierung und fortgeschrittene Funnel-Architektur weiter skalieren können.",
+    "Dein Setup ist beeindruckend. Lass uns gemeinsam herausfinden, welche Hebel dein System auf dem aktuellen Niveau weiter skalierbar machen – ohne dass die Qualität leidet.",
 };
 
 const CATEGORY_LABEL: Record<CategoryKey, string> = {
@@ -72,10 +73,10 @@ const SEVERITY_COLOR: Record<string, string> = {
 const CALENDLY_URL = "https://calendar.app.google/gRioFxoyaXwjQXEx8";
 
 const VISION_ITEMS = [
-  "Dein Sales-Team spricht nur noch mit Leads, die wirklich kaufbereit sind",
-  "Jeder Lead wird innerhalb von Minuten kontaktiert – automatisch",
-  "Du weißt genau, was ein Kunde dich kostet und welcher Kanal den besten ROI liefert",
-  "Weniger Leads, aber mehr Abschlüsse – bei niedrigeren Kosten",
+  "Dein Sales-Team spricht nur noch mit qualifizierten Interessenten – weil dein Funnel vorher filtert",
+  "Jeder Lead wird innerhalb von Minuten kontaktiert – weil automatisierte Prozesse die Erstreaktion übernehmen",
+  "Du weißt exakt, was ein Kunde dich kostet und welcher Kanal den besten ROI liefert – weil End-to-End-Tracking die Datengrundlage schafft",
+  "Weniger Leads, aber mehr Abschlüsse bei niedrigeren Kosten – weil jeder Schritt im System aufeinander abgestimmt ist",
 ];
 
 export default function ResultPage({ result }: ResultPageProps) {
@@ -265,7 +266,7 @@ export default function ResultPage({ result }: ResultPageProps) {
         transition={{ delay: 4.2, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
       >
         <h2 className="mb-6 font-[family-name:var(--font-display)] text-xl font-medium text-text-primary sm:text-2xl">
-          Stell dir vor...
+          Was ein optimiertes System für dich bedeutet
         </h2>
         <div className="flex flex-col gap-3">
           {VISION_ITEMS.map((item, i) => (
@@ -292,7 +293,7 @@ export default function ResultPage({ result }: ResultPageProps) {
       >
         <div className="flex flex-col items-center gap-3 border-t border-border py-6 text-center">
           <p className="text-xs text-text-muted">
-            entity x — Performance Marketing aus Berlin · 25+ Expert:innen ·
+            entity x — Performance Marketing aus Berlin · 25+ Spezialist:innen ·
             Seit 2019
           </p>
           <p className="text-xs text-text-muted/60">
@@ -309,13 +310,19 @@ export default function ResultPage({ result }: ResultPageProps) {
         transition={{ delay: 5.0, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
       >
         <div className="rounded-[var(--radius-card)] border border-border bg-surface p-6 text-center sm:p-8">
-            <p className="mb-4 text-xs font-medium uppercase tracking-widest text-text-muted/50">
-              entity x®
-            </p>
+            <div className="mb-4 flex justify-center">
+              <Image
+                src="/logos/entityx/entityx_Logo_RGB_Long_Blue_LowRes.png"
+                alt="entity x"
+                width={100}
+                height={26}
+                unoptimized
+              />
+            </div>
             <h2 className="mb-3 font-[family-name:var(--font-display)] text-2xl font-medium text-text-primary">
               {tier === "top_performer"
-                ? "Lass uns dein System skalieren"
-                : "Lass uns das gemeinsam fixen"}
+                ? "Lass uns dein System gemeinsam skalieren"
+                : "Lass uns dein System gemeinsam optimieren"}
             </h2>
             <p className="mb-6 text-base text-text-secondary">
               {TIER_CTA_BODY[tier]}

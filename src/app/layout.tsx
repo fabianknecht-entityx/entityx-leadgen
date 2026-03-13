@@ -17,14 +17,14 @@ const dmSans = DM_Sans({
 export const metadata: Metadata = {
   title: "Lead-Gen-Score | entity x",
   description:
-    "Finde in 2 Minuten heraus, wo dein Funnel Geld verbrennt – und wie du mehr Kunden aus dem gleichen Budget holst.",
+    "Diese Analyse zeigt dir in 2 Minuten, an welchen Stellen dein System qualifizierte Interessenten verliert – und wo die größten Hebel liegen.",
   icons: {
     icon: "https://entityx.com/wp-content/uploads/2024/02/cropped-Favicon-WhiteonBlack-512px-32x32.png",
   },
   openGraph: {
     title: "Lead-Gen-Score | entity x",
     description:
-      "Finde in 2 Minuten heraus, wo dein Funnel Geld verbrennt – und wie du mehr Kunden aus dem gleichen Budget holst.",
+      "Diese Analyse zeigt dir in 2 Minuten, an welchen Stellen dein System qualifizierte Interessenten verliert – und wo die größten Hebel liegen.",
     images: [
       "https://entityx.com/wp-content/uploads/2024/03/strategy.png.webp",
     ],

@@ -100,6 +100,26 @@ export default function ContactStep({ step }: ContactStepProps) {
                   </option>
                 ))}
               </select>
+            ) : field.type === "tel_with_code" ? (
+              <div className="flex gap-2">
+                <select
+                  value={formData[`${field.id}_code`] ?? field.options?.[0] ?? ""}
+                  onChange={(e) => handleChange(`${field.id}_code`, e.target.value)}
+                  className="h-12 w-28 shrink-0 rounded-[var(--radius-card)] border border-border bg-surface px-3 text-text-primary outline-none transition-colors focus:border-accent appearance-none"
+                >
+                  {field.options?.map((opt) => (
+                    <option key={opt} value={opt}>{opt}</option>
+                  ))}
+                </select>
+                <input
+                  id={field.id}
+                  type="tel"
+                  value={formData[field.id] ?? ""}
+                  onChange={(e) => handleChange(field.id, e.target.value)}
+                  placeholder={field.placeholder}
+                  className="h-12 flex-1 rounded-[var(--radius-card)] border border-border bg-surface px-4 text-text-primary placeholder:text-text-muted outline-none transition-colors focus:border-accent"
+                />
+              </div>
             ) : (
               <input
                 id={field.id}
@@ -154,10 +174,10 @@ export default function ContactStep({ step }: ContactStepProps) {
                     strokeLinecap="round"
                   />
                 </svg>
-                Wird berechnet...
+                Analyse wird erstellt...
               </span>
             ) : (
-              step.cta_button ?? "Score berechnen"
+              step.cta_button ?? "Ergebnis anzeigen"
             )}
           </Button>
         </motion.div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { useFunnel } from "@/context/FunnelContext";
 import ProgressBar from "@/components/ui/ProgressBar";
@@ -60,9 +61,13 @@ export default function FunnelContainer() {
           ) : (
             <div />
           )}
-          <span className="font-display text-sm font-semibold tracking-wide text-accent">
-            entity x
-          </span>
+          <Image
+            src="/logos/entityx/entityx_Logo_RGB_Long_Blue_LowRes.png"
+            alt="entity x"
+            width={90}
+            height={24}
+            unoptimized
+          />
         </div>
       </div>
 
@@ -71,9 +76,9 @@ export default function FunnelContainer() {
         <AnimatePresence mode="wait">
           <motion.div
             key={currentStep.id}
-            initial={{ opacity: 0, y: 16, filter: "blur(4px)" }}
-            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            exit={{ opacity: 0, y: -16, filter: "blur(4px)" }}
+            initial={{ opacity: 0, scale: 0.96, filter: "blur(4px)" }}
+            animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+            exit={{ opacity: 0, scale: 1.02, filter: "blur(4px)" }}
             transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
             className="w-full flex justify-center"
           >

@@ -4,9 +4,10 @@ import { motion } from "framer-motion";
 
 interface BackgroundEffectsProps {
   variant?: "light" | "dark";
+  exiting?: boolean;
 }
 
-export default function BackgroundEffects({ variant = "light" }: BackgroundEffectsProps) {
+export default function BackgroundEffects({ variant = "light", exiting = false }: BackgroundEffectsProps) {
   if (variant === "dark") {
     return (
       <div
@@ -20,11 +21,11 @@ export default function BackgroundEffects({ variant = "light" }: BackgroundEffec
             background:
               "radial-gradient(ellipse 70% 50% at 50% 20%, rgba(17,59,210,0.25) 0%, transparent 70%)",
           }}
-          animate={{
+          animate={exiting ? { opacity: 0 } : {
             opacity: [0.7, 1, 0.7],
             scale: [0.98, 1.03, 0.98],
           }}
-          transition={{
+          transition={exiting ? { duration: 0.4 } : {
             duration: 8,
             repeat: Infinity,
             ease: "easeInOut",
@@ -38,12 +39,12 @@ export default function BackgroundEffects({ variant = "light" }: BackgroundEffec
             background:
               "radial-gradient(circle 500px at 80% 80%, rgba(239,68,68,0.08) 0%, transparent 100%)",
           }}
-          animate={{
+          animate={exiting ? { opacity: 0 } : {
             x: [0, -25, 0],
             y: [0, -15, 0],
             opacity: [0.6, 1, 0.6],
           }}
-          transition={{
+          transition={exiting ? { duration: 0.4 } : {
             duration: 10,
             repeat: Infinity,
             ease: "easeInOut",
@@ -57,11 +58,11 @@ export default function BackgroundEffects({ variant = "light" }: BackgroundEffec
             background:
               "radial-gradient(circle, rgba(17,59,210,0.12) 0%, transparent 70%)",
           }}
-          animate={{
+          animate={exiting ? { opacity: 0 } : {
             opacity: [0.5, 0.8, 0.5],
             scale: [1, 1.15, 1],
           }}
-          transition={{
+          transition={exiting ? { duration: 0.4 } : {
             duration: 12,
             repeat: Infinity,
             ease: "easeInOut",
@@ -76,11 +77,11 @@ export default function BackgroundEffects({ variant = "light" }: BackgroundEffec
             background:
               "radial-gradient(circle, rgba(245,158,11,0.06) 0%, transparent 70%)",
           }}
-          animate={{
+          animate={exiting ? { opacity: 0 } : {
             opacity: [0.4, 0.7, 0.4],
             scale: [1, 1.1, 1],
           }}
-          transition={{
+          transition={exiting ? { duration: 0.4 } : {
             duration: 14,
             repeat: Infinity,
             ease: "easeInOut",

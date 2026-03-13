@@ -39,7 +39,7 @@ const INSIGHT_MAP: Record<CategoryKey, InsightVariant[]> = {
       severity: "critical",
       title: "Deine Reaktionszeit kostet dich Deals",
       body: "Ohne festen Prozess oder mit Reaktionszeiten über 24 Stunden hast du den Lead in den meisten Fällen bereits verloren. 78% der Kunden kaufen beim Unternehmen, das zuerst antwortet – nicht beim besten oder günstigsten.",
-      datapoint: "100× bessere Conversion bei Antwort unter 5 Min vs. 30 Min",
+      datapoint: "21× höhere Qualifizierungsrate bei Antwort unter 5 Min vs. 30 Min",
     },
     {
       maxScore: 12,
@@ -51,8 +51,8 @@ const INSIGHT_MAP: Record<CategoryKey, InsightVariant[]> = {
     {
       maxScore: 20,
       severity: "good",
-      title: "Gute Reaktionszeit – Automatisierung als nächster Schritt",
-      body: "Unter 1 Stunde ist solide. Der Game-Changer: automatisierte Erstreaktion per WhatsApp oder SMS innerhalb von Sekunden. Das hält den Lead warm, bis dein Team persönlich übernimmt.",
+      title: "Gute Reaktionszeit – der entscheidende Hebel liegt in der Automatisierung",
+      body: "Unter 1 Stunde ist solide. Der nächste Schritt: eine automatisierte Erstreaktion per WhatsApp oder SMS innerhalb von Sekunden. Das hält den Lead warm, bis dein Team persönlich übernimmt.",
       datapoint: "Automatisierte Sofort-Antwort verdoppelt die Kontaktrate",
     },
   ],
@@ -62,7 +62,7 @@ const INSIGHT_MAP: Record<CategoryKey, InsightVariant[]> = {
       maxScore: 8,
       severity: "critical",
       title: "Dein Follow-up verschenkt abschlussbereite Leads",
-      body: "Ohne strukturiertes Follow-up verlierst du den Großteil deiner Leads. 80% aller Abschlüsse passieren erst nach dem 5. Kontakt – aber die meisten Teams geben nach 1–2 Versuchen auf. Das ist, als würdest du kurz vor der Ziellinie stehen bleiben.",
+      body: "Ohne strukturiertes Follow-up verlierst du den Großteil deiner Leads. 80% aller Abschlüsse passieren erst nach dem 5. Kontakt – aber die meisten Teams geben nach 1–2 Versuchen auf. Das bedeutet: Du investierst in die Lead-Generierung, lässt aber den Abschluss systematisch liegen.",
       datapoint: "80% der Sales brauchen 5+ Follow-ups, 48% der Vertriebler machen nur einen Versuch",
     },
     {
@@ -86,7 +86,7 @@ const INSIGHT_MAP: Record<CategoryKey, InsightVariant[]> = {
       maxScore: 3,
       severity: "critical",
       title: "Du optimierst im Dunkeln",
-      body: "Ohne exakten CPL und CPA weißt du nicht, welcher Kanal, welche Ad, welcher Funnel wirklich performt – und welcher nur Geld verbrennt. Du investierst Budget, ohne zu wissen, ob es sich rentiert. Das ist wie Autofahren ohne Tacho.",
+      body: "Ohne exakten CPL und CPA weißt du nicht, welcher Kanal, welche Ad, welcher Funnel wirklich performt – und wo Budget ohne Ergebnis abfließt. Du triffst Entscheidungen auf Basis von Annahmen statt auf Basis von Daten. Damit lässt sich kein System gezielt optimieren.",
       datapoint: "Unternehmen ohne Tracking verschwenden bis zu 50% ihres Marketing-Budgets",
     },
     {
@@ -100,7 +100,7 @@ const INSIGHT_MAP: Record<CategoryKey, InsightVariant[]> = {
       maxScore: 15,
       severity: "good",
       title: "Gutes Tracking – nächster Schritt: End-to-End Attribution",
-      body: "Du trackst die wichtigsten KPIs. Der nächste Level: Closed-Loop-Reporting, das jeden Euro vom Klick bis zum Abschluss nachverfolgt. So siehst du nicht nur den CPL, sondern den echten ROI pro Kanal und Kampagne.",
+      body: "Du trackst die wichtigsten KPIs. Der nächste Schritt: Closed-Loop-Reporting, das jeden Euro vom Klick bis zum Abschluss nachverfolgt. So siehst du nicht nur den CPL, sondern den echten ROI pro Kanal und Kampagne.",
       datapoint: "End-to-End-Attribution steigert Marketing-ROI um durchschnittlich 15–20%",
     },
   ],
@@ -117,8 +117,8 @@ const INSIGHT_MAP: Record<CategoryKey, InsightVariant[]> = {
       maxScore: 5,
       severity: "moderate",
       title: "Teilweise verzahnt – aber nicht durchgängig",
-      body: "Ein Teil deiner Kette funktioniert, aber Marketing und Sales übergeben sich Leads, ohne dass der Prozess nahtlos ist. Das führt zu Reibungsverlusten an jeder Schnittstelle. Aligned Teams wachsen 24% schneller im Umsatz.",
-      datapoint: "Aligned Organisationen erzielen 24% schnelleres Umsatzwachstum",
+      body: "Ein Teil deiner Kette funktioniert, aber Marketing und Sales übergeben sich Leads, ohne dass der Prozess nahtlos ist. Das führt zu Reibungsverlusten an jeder Schnittstelle. Verzahnte Teams wachsen 24% schneller im Umsatz.",
+      datapoint: "Verzahnte Organisationen erzielen 24% schnelleres Umsatzwachstum",
     },
     {
       maxScore: 15,
