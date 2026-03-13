@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { useFunnel } from "@/context/FunnelContext";
 import ProgressBar from "@/components/ui/ProgressBar";
 import StepRenderer from "@/components/funnel/StepRenderer";
@@ -33,7 +34,7 @@ export default function FunnelContainer() {
   return (
     <div className="flex min-h-dvh flex-col">
       {/* Top bar: progress + back + branding */}
-      <div className="sticky top-0 z-10 bg-background">
+      <div className="sticky top-0 z-10 bg-background shadow-[0_1px_0_var(--border)]">
         <ProgressBar progress={progress} />
         <div className="flex items-center justify-between px-4 py-3">
           {canGoBack ? (
@@ -59,15 +60,26 @@ export default function FunnelContainer() {
           ) : (
             <div />
           )}
-          <span className="font-display text-sm tracking-wide text-text-muted">
+          <span className="font-display text-sm font-semibold tracking-wide text-accent">
             entity x
           </span>
         </div>
       </div>
 
       {/* Step content */}
-      <div className="flex flex-1 items-center justify-center px-4 pb-12">
-        <StepRenderer step={currentStep} />
+      <div className="flex flex-1 items-center justify-center px-4 pb-12 overflow-hidden">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentStep.id}
+            initial={{ opacity: 0, y: 16, filter: "blur(4px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            exit={{ opacity: 0, y: -16, filter: "blur(4px)" }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            className="w-full flex justify-center"
+          >
+            <StepRenderer step={currentStep} />
+          </motion.div>
+        </AnimatePresence>
       </div>
     </div>
   );

@@ -49,9 +49,9 @@ export default function QuestionStep({ step }: QuestionStepProps) {
           {step.options?.map((opt, i) => (
             <motion.div
               key={opt.id}
-              initial={{ opacity: 0, y: 12 }}
+              initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.06, duration: 0.3 }}
+              transition={{ delay: i * 0.08, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             >
               <OptionCard
                 label={opt.label}
@@ -94,9 +94,9 @@ export default function QuestionStep({ step }: QuestionStepProps) {
           {step.options?.map((opt, i) => (
             <motion.div
               key={opt.id}
-              initial={{ opacity: 0, y: 12 }}
+              initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.06, duration: 0.3 }}
+              transition={{ delay: i * 0.08, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             >
               <OptionCard
                 label={opt.label}
@@ -110,9 +110,9 @@ export default function QuestionStep({ step }: QuestionStepProps) {
         </div>
         <motion.div
           className="mt-8"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.3 }}
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         >
           <Button
             onClick={handleContinue}
@@ -147,9 +147,9 @@ export default function QuestionStep({ step }: QuestionStepProps) {
           {step.questions.map((q, qi) => (
             <div key={q.id}>
               <motion.div
-                initial={{ opacity: 0, y: 12 }}
+                initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: qi * 0.15, duration: 0.4 }}
+                transition={{ delay: qi * 0.2, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
               >
                 <h2 className="mb-2 font-[family-name:var(--font-display)] text-xl font-medium text-text-primary sm:text-2xl">
                   {q.label}
@@ -162,11 +162,12 @@ export default function QuestionStep({ step }: QuestionStepProps) {
                 {q.options.map((opt, oi) => (
                   <motion.div
                     key={opt.id}
-                    initial={{ opacity: 0, y: 12 }}
+                    initial={{ opacity: 0, y: 24 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{
-                      delay: qi * 0.15 + oi * 0.06,
-                      duration: 0.3,
+                      delay: qi * 0.2 + oi * 0.08,
+                      duration: 0.6,
+                      ease: [0.16, 1, 0.3, 1]
                     }}
                   >
                     <OptionCard
@@ -183,9 +184,9 @@ export default function QuestionStep({ step }: QuestionStepProps) {
         </div>
         <motion.div
           className="mt-8"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.4 }}
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         >
           <Button
             onClick={handleContinue}
@@ -216,9 +217,9 @@ function StepLayout({
       {question && (
         <motion.h2
           className="mb-2 font-[family-name:var(--font-display)] text-2xl font-medium text-text-primary sm:text-3xl"
-          initial={{ opacity: 0, y: -8 }}
+          initial={{ opacity: 0, y: -16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4 }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         >
           {question}
         </motion.h2>
@@ -228,7 +229,7 @@ function StepLayout({
           className="mb-6 text-sm text-text-muted"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.1, duration: 0.3 }}
+          transition={{ delay: 0.2, duration: 0.5 }}
         >
           {instruction}
         </motion.p>

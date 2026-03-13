@@ -19,8 +19,8 @@ const TIER_LABEL: Record<ScoreTier, string> = {
 };
 
 const TIER_SUBTITLE: Record<ScoreTier, string> = {
-  blindflug: "Du fliegst blind.",
-  basis: "Du hast eine Basis, aber Geld bleibt liegen.",
+  blindflug: "Dein System kostet dich jeden Tag Kunden.",
+  basis: "Dein Potenzial bleibt auf der Strecke.",
   guter_ansatz: "Besser als die meisten. Aber da geht noch was.",
   top_performer: "Du gehörst zu den Top 10%.",
 };
@@ -143,7 +143,7 @@ export default function ResultPage({ result }: ResultPageProps) {
           className="mt-4 max-w-xl text-base leading-relaxed text-text-secondary"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 2.4, duration: 0.5 }}
+          transition={{ delay: 2.4, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
           {TIER_BODY[tier]}
         </motion.p>
@@ -168,9 +168,9 @@ export default function ResultPage({ result }: ResultPageProps) {
             return (
               <motion.div
                 key={cat}
-                initial={{ opacity: 0, x: -20 }}
+                initial={{ opacity: 0, x: -24 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 2.8 + i * 0.1, duration: 0.4 }}
+                transition={{ delay: 2.8 + i * 0.12, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
               >
                 <div className="mb-1.5 flex items-center justify-between">
                   <span className="text-sm text-text-secondary">
@@ -185,11 +185,13 @@ export default function ResultPage({ result }: ResultPageProps) {
                     className="h-full rounded-full"
                     style={{
                       backgroundColor:
-                        pct <= 33
+                        pct <= 40
                           ? "var(--score-red)"
-                          : pct <= 66
+                          : pct <= 65
                             ? "var(--score-orange)"
-                            : "var(--score-green)",
+                            : pct <= 79
+                              ? "var(--score-yellow-green)"
+                              : "var(--score-green)",
                     }}
                     initial={{ width: 0 }}
                     animate={{ width: `${pct}%` }}
@@ -210,9 +212,9 @@ export default function ResultPage({ result }: ResultPageProps) {
       {insights.length > 0 && (
         <motion.div
           className="mt-14 w-full max-w-lg"
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 32 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 3.5, duration: 0.5 }}
+          transition={{ delay: 3.5, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
           <h2 className="mb-6 font-[family-name:var(--font-display)] text-xl font-medium text-text-primary sm:text-2xl">
             Wo du am meisten verlierst
@@ -221,10 +223,10 @@ export default function ResultPage({ result }: ResultPageProps) {
             {insights.map((insight, i) => (
               <motion.div
                 key={insight.category}
-                className="rounded-[var(--radius-card)] border border-border bg-surface p-5"
-                initial={{ opacity: 0, y: 16 }}
+                className="rounded-[var(--radius-card)] border border-border bg-surface p-5 shadow-[0_4px_12px_rgba(15,23,42,0.02)] transition-colors hover:border-text-muted"
+                initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 3.7 + i * 0.15, duration: 0.4 }}
+                transition={{ delay: 3.7 + i * 0.15, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
               >
                 <div className="mb-2 flex items-center gap-2">
                   <div
@@ -258,9 +260,9 @@ export default function ResultPage({ result }: ResultPageProps) {
       {/* Vision Section */}
       <motion.div
         className="mt-14 w-full max-w-lg"
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 32 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 4.2, duration: 0.5 }}
+        transition={{ delay: 4.2, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
       >
         <h2 className="mb-6 font-[family-name:var(--font-display)] text-xl font-medium text-text-primary sm:text-2xl">
           Stell dir vor...
@@ -270,9 +272,9 @@ export default function ResultPage({ result }: ResultPageProps) {
             <motion.div
               key={i}
               className="flex items-start gap-3"
-              initial={{ opacity: 0, x: -12 }}
+              initial={{ opacity: 0, x: -16 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 4.4 + i * 0.1, duration: 0.3 }}
+              transition={{ delay: 4.4 + i * 0.15, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             >
               <span className="mt-1.5 block h-1.5 w-1.5 flex-shrink-0 rounded-full bg-accent" />
               <p className="text-base text-text-secondary">{item}</p>
@@ -302,40 +304,18 @@ export default function ResultPage({ result }: ResultPageProps) {
       {/* CTA Section */}
       <motion.div
         className="mt-2 w-full max-w-lg"
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 32 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 5, duration: 0.5 }}
+        transition={{ delay: 5.0, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
       >
-        {isDisqualified ? (
-          <div className="rounded-[var(--radius-card)] border border-border bg-surface p-6 text-center sm:p-8">
+        <div className="rounded-[var(--radius-card)] border border-border bg-surface p-6 text-center sm:p-8">
             <p className="mb-4 text-xs font-medium uppercase tracking-widest text-text-muted/50">
               entity x®
             </p>
             <h2 className="mb-3 font-[family-name:var(--font-display)] text-2xl font-medium text-text-primary">
-              Dein nächster Schritt
-            </h2>
-            <p className="mb-6 text-base text-text-secondary">
-              Basierend auf deinem Score empfehlen wir dir, mit unserer
-              kostenlosen Lead-Gen-Checkliste zu starten. Wenn du bereit bist zu
-              skalieren, sind wir für dich da.
-            </p>
-            <Button onClick={handleGuideClick} size="large" className="w-full">
-              Kostenlose Checkliste herunterladen
-            </Button>
-            <button
-              onClick={handleCalendlyClick}
-              className="mt-4 text-sm text-text-muted transition-colors hover:text-accent"
-            >
-              Trotzdem Termin buchen? &rarr;
-            </button>
-          </div>
-        ) : (
-          <div className="rounded-[var(--radius-card)] border border-border bg-surface p-6 text-center sm:p-8">
-            <p className="mb-4 text-xs font-medium uppercase tracking-widest text-text-muted/50">
-              entity x®
-            </p>
-            <h2 className="mb-3 font-[family-name:var(--font-display)] text-2xl font-medium text-text-primary">
-              Lass uns dein System optimieren
+              {tier === "top_performer"
+                ? "Lass uns dein System skalieren"
+                : "Lass uns das gemeinsam fixen"}
             </h2>
             <p className="mb-6 text-base text-text-secondary">
               {TIER_CTA_BODY[tier]}
@@ -374,8 +354,15 @@ export default function ResultPage({ result }: ResultPageProps) {
                 </p>
               ))}
             </div>
+            {isDisqualified && (
+              <button
+                onClick={handleGuideClick}
+                className="mt-5 text-sm text-text-muted underline underline-offset-2 transition-colors hover:text-accent"
+              >
+                Oder starte mit unserer kostenlosen Checkliste &rarr;
+              </button>
+            )}
           </div>
-        )}
       </motion.div>
 
       {/* Footer */}
