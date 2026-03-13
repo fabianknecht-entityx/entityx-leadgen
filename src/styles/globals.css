@@ -1,13 +1,13 @@
 @import "tailwindcss";
 
 :root {
-  --background: #F0F4FA;
+  --background: #F4F6FB;
   --foreground: #0F172A;
 
   /* Brand colors */
-  --accent: #2563EB;
-  --accent-hover: #1D4ED8;
-  --accent-muted: rgba(37, 99, 235, 0.10);
+  --accent: #113BD2;
+  --accent-hover: #0E2FA8;
+  --accent-muted: rgba(17, 59, 210, 0.10);
 
   /* Score gauge colors */
   --score-red: #EF4444;
@@ -17,13 +17,18 @@
 
   /* Surface colors */
   --surface: #FFFFFF;
-  --surface-elevated: #E8EEF6;
+  --surface-elevated: #E6ECF5;
   --border: rgba(15, 23, 42, 0.10);
 
   /* Text */
   --text-primary: #0F172A;
   --text-secondary: #475569;
   --text-muted: #94A3B8;
+
+  /* Hero (dark mode) */
+  --hero-bg: #0B1A2E;
+  --hero-text: #FFFFFF;
+  --hero-text-muted: rgba(255, 255, 255, 0.6);
 
   /* Radius */
   --radius-card: 8px;
@@ -32,6 +37,10 @@
   /* Fonts */
   --font-display: var(--font-playfair);
   --font-body: var(--font-dm-sans);
+
+  /* Animations */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-expo: cubic-bezier(0.87, 0, 0.13, 1);
 }
 
 @theme inline {
@@ -46,6 +55,9 @@
   --color-text-primary: var(--text-primary);
   --color-text-secondary: var(--text-secondary);
   --color-text-muted: var(--text-muted);
+  --color-hero-bg: var(--hero-bg);
+  --color-hero-text: var(--hero-text);
+  --color-hero-text-muted: var(--hero-text-muted);
   --color-score-red: var(--score-red);
   --color-score-orange: var(--score-orange);
   --color-score-yellow-green: var(--score-yellow-green);
@@ -58,9 +70,8 @@
 
 body {
   background:
-    radial-gradient(circle at 1px 1px, rgba(37, 99, 235, 0.07) 0.7px, transparent 0.7px),
+    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(17, 59, 210, 0.06) 0%, transparent 70%),
     var(--background);
-  background-size: 24px 24px, auto;
   color: var(--foreground);
   font-family: var(--font-body), sans-serif;
 }

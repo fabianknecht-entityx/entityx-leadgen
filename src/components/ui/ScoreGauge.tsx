@@ -9,9 +9,9 @@ interface ScoreGaugeProps {
 }
 
 function getScoreColor(score: number): string {
-  if (score <= 25) return "var(--score-red)";
-  if (score <= 50) return "var(--score-orange)";
-  if (score <= 75) return "var(--score-yellow-green)";
+  if (score <= 40) return "var(--score-red)";
+  if (score <= 65) return "var(--score-orange)";
+  if (score <= 79) return "var(--score-yellow-green)";
   return "var(--score-green)";
 }
 
@@ -27,8 +27,8 @@ export default function ScoreGauge({ score, size = 240 }: ScoreGaugeProps) {
 
   useEffect(() => {
     const controls = animate(motionScore, score, {
-      duration: 2,
-      ease: "easeOut",
+      duration: 2.5,
+      ease: [0.16, 1, 0.3, 1], // Expo out
       onUpdate: (latest) => setDisplayScore(Math.round(latest)),
     });
     return controls.stop;
@@ -86,20 +86,26 @@ export default function ScoreGauge({ score, size = 240 }: ScoreGaugeProps) {
           strokeDasharray={circumference}
           style={{ strokeDashoffset }}
           filter="url(#glow)"
-          opacity={0.5}
+          animate={{ opacity: [0.3, 0.7, 0.3] }}
+          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
         />
       </svg>
 
       {/* Score number in center */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center">
+      <motion.div 
+        className="absolute inset-0 flex flex-col items-center justify-center"
+        initial={{ scale: 0.9, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ duration: 1, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+      >
         <span
           className="font-[family-name:var(--font-display)] text-6xl font-bold tabular-nums"
           style={{ color }}
         >
           {displayScore}
         </span>
-        <span className="text-sm text-text-muted">von 100</span>
-      </div>
+        <span className="text-sm text-text-muted mt-1 font-medium tracking-wide uppercase">von 100</span>
+      </motion.div>
     </div>
   );
 }

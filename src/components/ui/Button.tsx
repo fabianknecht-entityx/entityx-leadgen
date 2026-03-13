@@ -22,11 +22,11 @@ export default function Button({
   className = "",
 }: ButtonProps) {
   const base =
-    "inline-flex items-center justify-center gap-2 font-medium transition-all duration-200 rounded-[var(--radius-button)] cursor-pointer select-none";
+    "relative inline-flex items-center justify-center gap-2 font-medium transition-colors duration-300 rounded-[var(--radius-button)] cursor-pointer select-none overflow-hidden outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2";
 
   const variants = {
     primary:
-      "bg-accent text-white hover:bg-accent-hover disabled:opacity-40 disabled:cursor-not-allowed",
+      "text-white hover:bg-accent-hover hover:shadow-[0_4px_24px_rgba(17,59,210,0.35)] disabled:opacity-40 disabled:cursor-not-allowed",
     secondary:
       "bg-surface-elevated text-text-primary border border-border hover:border-text-muted disabled:opacity-40 disabled:cursor-not-allowed",
     ghost:
@@ -44,9 +44,17 @@ export default function Button({
       onClick={onClick}
       disabled={disabled}
       className={`${base} ${variants[variant]} ${sizes[size]} ${className}`}
-      whileTap={disabled ? undefined : { scale: 0.97 }}
+      whileHover={disabled ? undefined : { scale: 1.01 }}
+      whileTap={disabled ? undefined : { scale: 0.96 }}
+      transition={{ type: "spring", stiffness: 400, damping: 25 }}
     >
-      {children}
+      {variant === "primary" && (
+        <span
+          className="absolute inset-0 rounded-[var(--radius-button)]"
+          style={{ backgroundImage: "linear-gradient(135deg, #113BD2 0%, #1a4de6 100%)" }}
+        />
+      )}
+      <span className="relative z-10 flex items-center gap-2">{children}</span>
     </motion.button>
   );
 }

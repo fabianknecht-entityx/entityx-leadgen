@@ -34,9 +34,9 @@ function getOptionScore(
 }
 
 export function getScoreTier(total: number): ScoreTier {
-  if (total <= 25) return "blindflug";
-  if (total <= 50) return "basis";
-  if (total <= 75) return "guter_ansatz";
+  if (total <= 40) return "blindflug";
+  if (total <= 65) return "basis";
+  if (total <= 79) return "guter_ansatz";
   return "top_performer";
 }
 
