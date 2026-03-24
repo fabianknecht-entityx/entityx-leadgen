@@ -21,23 +21,32 @@ export default function OptionCard({
     <motion.button
       type="button"
       onClick={onClick}
-      className={`group relative w-full cursor-pointer overflow-hidden rounded-[var(--radius-card)] border px-5 py-4 text-left transition-colors duration-300 ${
+      className={`group relative w-full cursor-pointer overflow-hidden rounded-[var(--radius-card)] border-2 px-5 py-4 text-left transition-colors duration-200 ${
         selected
-          ? "border-accent border-l-[3px] bg-accent-muted shadow-[inset_0_0_0_1px_var(--color-accent-muted),0_4px_12px_rgba(17,59,210,0.10)]"
-          : "border-border bg-surface hover:border-text-secondary"
+          ? "border-accent bg-accent-muted shadow-[0_4px_16px_rgba(17,59,210,0.12)]"
+          : "border-border bg-surface hover:border-text-secondary hover:shadow-[0_4px_16px_rgba(15,23,42,0.06)]"
       }`}
-      whileHover={{ y: -3, boxShadow: selected ? "inset 0 0 0 1px var(--color-accent-muted), 0 8px 20px rgba(17,59,210,0.14)" : "0 8px 20px rgba(15,23,42,0.06)" }}
-      whileTap={{ scale: 0.98, y: 0 }}
+      whileTap={{ scale: 0.985 }}
       transition={{ type: "spring", stiffness: 400, damping: 25 }}
     >
+      {/* Shine sweep on hover */}
+      <div className="pointer-events-none absolute inset-0 translate-x-[-110%] bg-gradient-to-r from-transparent via-white/[0.07] to-transparent transition-transform duration-500 group-hover:translate-x-[110%]" />
+
+      {/* Selected background glow */}
+      {selected && (
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_0%,rgba(17,59,210,0.07),transparent)]" />
+      )}
+
       <div className="flex items-start gap-4 relative z-10">
         {/* Checkbox / Radio indicator */}
-        <div
-          className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center border transition-colors duration-300 ${
+        <motion.div
+          animate={selected ? { scale: 1.05 } : { scale: 1 }}
+          transition={{ type: "spring", stiffness: 500, damping: 25 }}
+          className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center border-2 transition-colors duration-200 ${
             multiSelect ? "rounded" : "rounded-full"
           } ${
             selected
-              ? "border-accent bg-accent shadow-[0_0_8px_rgba(17,59,210,0.4)]"
+              ? "border-accent bg-accent shadow-[0_0_10px_rgba(17,59,210,0.45)]"
               : "border-text-muted bg-transparent group-hover:border-text-secondary"
           }`}
         >
@@ -59,10 +68,10 @@ export default function OptionCard({
               />
             </motion.svg>
           )}
-        </div>
+        </motion.div>
 
         <div className="flex-1">
-          <span className="text-base font-medium text-text-primary">
+          <span className={`text-base font-medium transition-colors duration-200 ${selected ? "text-accent" : "text-text-primary"}`}>
             {label}
           </span>
           {sublabel && (

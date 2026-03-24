@@ -31,13 +31,19 @@ export default function FunnelContainer() {
   }
 
   const canGoBack = state.currentStepIndex > 0;
+  const totalSteps = state.steps.length;
+  const displayStep = state.currentStepIndex + 1;
 
   return (
     <div className="flex min-h-dvh flex-col">
       {/* Top bar: progress + back + branding */}
       <div className="sticky top-0 z-10 bg-background shadow-[0_1px_0_var(--border)]">
-        <ProgressBar progress={progress} />
-        <div className="flex items-center justify-between px-4 py-3">
+        <ProgressBar
+          progress={progress}
+          totalSteps={totalSteps}
+          currentStep={state.currentStepIndex}
+        />
+        <div className="flex items-center justify-between px-5 py-3 sm:px-8">
           {canGoBack ? (
             <button
               onClick={prevStep}
@@ -61,6 +67,12 @@ export default function FunnelContainer() {
           ) : (
             <div />
           )}
+
+          {/* Step counter */}
+          <span className="text-xs font-medium tabular-nums text-text-muted">
+            {displayStep} / {totalSteps}
+          </span>
+
           <Image
             src="/logos/entityx/entityx_Logo_RGB_Long_Blue_LowRes.png"
             alt="entity x"
@@ -71,14 +83,14 @@ export default function FunnelContainer() {
         </div>
       </div>
 
-      {/* Step content */}
-      <div className="flex flex-1 items-center justify-center px-4 pb-12 overflow-hidden">
+      {/* Step content — generous vertical breathing room */}
+      <div className="flex flex-1 items-center justify-center px-5 py-16 sm:px-8 sm:py-24">
         <AnimatePresence mode="wait">
           <motion.div
             key={currentStep.id}
-            initial={{ opacity: 0, scale: 0.96, filter: "blur(4px)" }}
+            initial={{ opacity: 0, scale: 0.97, filter: "blur(4px)" }}
             animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-            exit={{ opacity: 0, scale: 1.02, filter: "blur(4px)" }}
+            exit={{ opacity: 0, scale: 1.01, filter: "blur(4px)" }}
             transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
             className="w-full flex justify-center"
           >

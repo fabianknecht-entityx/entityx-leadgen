@@ -5,6 +5,7 @@ import {
   useContext,
   useReducer,
   useCallback,
+  useEffect,
   useMemo,
   type ReactNode,
 } from "react";
@@ -62,10 +63,9 @@ const STEP_TO_ANSWER: Record<string, keyof FunnelAnswers> = {
   industry: "industry",
 };
 
-// Before path is determined, show only shared steps + step 1
-const initialSteps = FUNNEL_STEPS.filter(
-  (s) => s.path_filter === undefined
-);
+// Initialize with active path steps so the total count is correct from step 1.
+// When SET_PATH fires after the user answers step 1, it replaces with the correct path.
+const initialSteps = getStepsForPath("active");
 
 const initialState: FunnelState = {
   screen: "funnel",
@@ -141,7 +141,29 @@ export function FunnelProvider({ children }: { children: ReactNode }) {
   const currentStep = state.steps[state.currentStepIndex] ?? null;
   const totalSteps = state.steps.length;
   const progress =
-    totalSteps > 0 ? ((state.currentStepIndex + 1) / totalSteps) * 100 : 0;
+    totalSteps > 0 ? (state.currentStepIndex / totalSteps) * 100 : 0;
+
+  // Fire funnel_step_viewed on every step change and when result is shown
+  useEffect(() => {
+    if (state.screen === "result") {
+      trackEvent("funnel_step_viewed", {
+        step_index: state.steps.length,
+        step_id: "result",
+        step_type: "result",
+        path: state.path ?? "unknown",
+      });
+    } else {
+      const step = state.steps[state.currentStepIndex];
+      if (step) {
+        trackEvent("funnel_step_viewed", {
+          step_index: state.currentStepIndex,
+          step_id: step.id,
+          step_type: step.type,
+          path: state.path ?? "unknown",
+        });
+      }
+    }
+  }, [state.currentStepIndex, state.screen]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const setAnswer = useCallback((idOrKey: string, value: unknown) => {
     const key = STEP_TO_ANSWER[idOrKey];
@@ -177,16 +199,64 @@ export function FunnelProvider({ children }: { children: ReactNode }) {
   const submitContact = useCallback(
     (data: Record<string, string>) => {
       const contactKeys = ["name", "company", "email", "phone", "industry"] as const;
+      const updatedAnswers = { ...state.answers };
       for (const key of contactKeys) {
         if (data[key] !== undefined) {
           dispatch({ type: "SET_ANSWER", key, value: data[key] });
+          updatedAnswers[key] = data[key];
         }
       }
-      trackEvent("funnel_contact_submitted", { score: 0, tier: "" });
+      // Calculate score now so we can include real values in the lead event
+      const result = calculateScore(updatedAnswers as FunnelAnswers, FUNNEL_STEPS);
+      trackEvent("funnel_lead_submitted", {
+        score: result.breakdown.total,
+        tier: result.tier,
+        path: state.path ?? "unknown",
+      });
+
+      // Fire-and-forget: send all lead data to Make.com webhook
+      fetch("https://hook.eu2.make.com/y67yp95m8a8nqrqiklmtijh4md37oosf", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          timestamp: new Date().toISOString(),
+          contact: {
+            name: data.name ?? "",
+            company: data.company ?? "",
+            email: data.email ?? "",
+            phone: data.phone ?? "",
+            phone_code: data.phone_code ?? "",
+            industry: data.industry ?? "",
+          },
+          funnel: {
+            path: state.path ?? "unknown",
+            situation: updatedAnswers.situation ?? "",
+            channels: updatedAnswers.channels ?? [],
+            funnel_maturity: updatedAnswers.funnel_maturity ?? "",
+            tracking: updatedAnswers.tracking ?? "",
+            speed: updatedAnswers.speed ?? "",
+            sales_process: updatedAnswers.sales_process ?? "",
+            followup: updatedAnswers.followup ?? "",
+            lead_volume: updatedAnswers.lead_volume ?? "",
+            budget: updatedAnswers.budget ?? "",
+            planned_budget: updatedAnswers.planned_budget ?? "",
+            clv: updatedAnswers.clv ?? "",
+          },
+          score: {
+            total: result.breakdown.total,
+            tier: result.tier,
+          },
+        }),
+      }).catch((err) => {
+        if (process.env.NODE_ENV === "development") {
+          console.error("[Funnel] Webhook failed:", err);
+        }
+      });
+
       // Small delay so state updates settle before scoring
       setTimeout(() => dispatch({ type: "GO_TO_RESULT" }), 0);
     },
-    []
+    [state.answers, state.path]
   );
 
   const value = useMemo(

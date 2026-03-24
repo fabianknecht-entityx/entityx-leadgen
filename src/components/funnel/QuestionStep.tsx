@@ -1,9 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import type { FunnelStep } from "@/types/funnel";
 import { useFunnel } from "@/context/FunnelContext";
+import { trackEvent } from "@/lib/tracking";
 import OptionCard from "@/components/ui/OptionCard";
 import Button from "@/components/ui/Button";
 
@@ -18,13 +19,15 @@ export default function QuestionStep({ step }: QuestionStepProps) {
   const [selected, setSelected] = useState<string | null>(null);
   const [multiSelected, setMultiSelected] = useState<string[]>([]);
 
-  // Dual question state
+  // Dual question — track which sub-question is active (0 or 1)
+  const [dualSubIndex, setDualSubIndex] = useState(0);
   const [dualAnswers, setDualAnswers] = useState<Record<string, string>>({});
 
   // Reset selection when step changes
   useEffect(() => {
     setSelected(null);
     setMultiSelected([]);
+    setDualSubIndex(0);
     setDualAnswers({});
   }, [step.id]);
 
@@ -39,6 +42,12 @@ export default function QuestionStep({ step }: QuestionStepProps) {
       }
       setSelected(optionId);
       setAnswer(step.id, optionId);
+      trackEvent("funnel_question_answered", {
+        step_id: step.id,
+        step_index: state.currentStepIndex,
+        answer_id: optionId,
+        path: state.path ?? "unknown",
+      });
       // Auto-advance after short delay for single select
       setTimeout(() => nextStep(), 300);
     };
@@ -79,6 +88,12 @@ export default function QuestionStep({ step }: QuestionStepProps) {
 
     const handleContinue = () => {
       setAnswer(step.id, multiSelected);
+      trackEvent("funnel_question_answered", {
+        step_id: step.id,
+        step_index: state.currentStepIndex,
+        answer_id: multiSelected.join(","),
+        path: state.path ?? "unknown",
+      });
       nextStep();
     };
 
@@ -126,77 +141,61 @@ export default function QuestionStep({ step }: QuestionStepProps) {
     );
   }
 
-  // Dual question
+  // Dual question — one sub-question at a time, tap to auto-advance
   if (step.type === "dual_question" && step.questions) {
-    const allAnswered = step.questions.every(
-      (q) => dualAnswers[q.id] !== undefined
-    );
+    const activeQuestion = step.questions[dualSubIndex];
 
-    const handleDualSelect = (questionId: string, optionId: string) => {
-      setDualAnswers((prev) => ({ ...prev, [questionId]: optionId }));
-      setAnswer(questionId, optionId);
-    };
+    const handleDualSelect = (optionId: string) => {
+      const updatedAnswers = { ...dualAnswers, [activeQuestion.id]: optionId };
+      setDualAnswers(updatedAnswers);
+      setAnswer(activeQuestion.id, optionId);
+      trackEvent("funnel_question_answered", {
+        step_id: activeQuestion.id,
+        step_index: state.currentStepIndex,
+        answer_id: optionId,
+        path: state.path ?? "unknown",
+      });
 
-    const handleContinue = () => {
-      nextStep();
+      if (dualSubIndex < step.questions!.length - 1) {
+        // Advance to next sub-question
+        setTimeout(() => setDualSubIndex((prev) => prev + 1), 300);
+      } else {
+        // All sub-questions answered — go to next step
+        setTimeout(() => nextStep(), 300);
+      }
     };
 
     return (
-      <StepLayout>
-        <div className="flex flex-col gap-10">
-          {step.questions.map((q, qi) => (
-            <div key={q.id}>
-              <motion.div
-                initial={{ opacity: 0, y: 24 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: qi * 0.2, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-              >
-                <h2 className="mb-2 font-[family-name:var(--font-display)] text-xl font-medium text-text-primary sm:text-2xl">
-                  {q.label}
-                </h2>
-                {q.sublabel && (
-                  <p className="mb-4 text-sm text-text-muted">{q.sublabel}</p>
-                )}
-              </motion.div>
-              <div className="flex flex-col gap-3">
-                {q.options.map((opt, oi) => (
-                  <motion.div
-                    key={opt.id}
-                    initial={{ opacity: 0, y: 24 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{
-                      delay: qi * 0.2 + oi * 0.08,
-                      duration: 0.6,
-                      ease: [0.16, 1, 0.3, 1]
-                    }}
-                  >
-                    <OptionCard
-                      label={opt.label}
-                      sublabel={opt.sublabel}
-                      selected={dualAnswers[q.id] === opt.id}
-                      onClick={() => handleDualSelect(q.id, opt.id)}
-                    />
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
+      <AnimatePresence mode="wait">
         <motion.div
-          className="mt-8"
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          key={`${step.id}-${dualSubIndex}`}
+          initial={{ opacity: 0, x: 40, filter: "blur(4px)" }}
+          animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
+          exit={{ opacity: 0, x: -40, filter: "blur(4px)" }}
+          transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+          className="w-full flex justify-center"
         >
-          <Button
-            onClick={handleContinue}
-            disabled={!allAnswered}
-            size="large"
-          >
-            {step.cta_button ?? "Weiter"}
-          </Button>
+          <StepLayout question={activeQuestion.label} instruction={activeQuestion.sublabel}>
+            <div className="flex flex-col gap-3">
+              {activeQuestion.options.map((opt, oi) => (
+                <motion.div
+                  key={opt.id}
+                  initial={{ opacity: 0, y: 24 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: oi * 0.08, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                >
+                  <OptionCard
+                    label={opt.label}
+                    sublabel={opt.sublabel}
+                    selected={dualAnswers[activeQuestion.id] === opt.id}
+                    onClick={() => handleDualSelect(opt.id)}
+                  />
+                </motion.div>
+              ))}
+            </div>
+          </StepLayout>
         </motion.div>
-      </StepLayout>
+      </AnimatePresence>
     );
   }
 
@@ -215,18 +214,27 @@ function StepLayout({
   return (
     <div className="flex w-full max-w-lg flex-col">
       {question && (
-        <motion.h2
-          className="mb-2 font-[family-name:var(--font-display)] text-2xl font-medium text-text-primary sm:text-3xl"
-          initial={{ opacity: 0, y: -16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-        >
-          {question}
-        </motion.h2>
+        <>
+          <motion.h2
+            className="font-[family-name:var(--font-display)] text-[clamp(1.5rem,4vw,2rem)] font-medium text-text-primary"
+            initial={{ opacity: 0, y: -16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          >
+            {question}
+          </motion.h2>
+          {/* Decorative accent underline */}
+          <motion.div
+            className="mt-3 h-0.5 w-10 rounded-full bg-accent"
+            initial={{ scaleX: 0, originX: 0 }}
+            animate={{ scaleX: 1 }}
+            transition={{ delay: 0.15, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          />
+        </>
       )}
       {instruction && (
         <motion.p
-          className="mb-6 text-sm text-text-muted"
+          className="mt-3 mb-5 text-sm text-text-muted"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2, duration: 0.5 }}
@@ -234,8 +242,9 @@ function StepLayout({
           {instruction}
         </motion.p>
       )}
-      {!instruction && question && <div className="mb-6" />}
-      {children}
+      <div className={instruction ? "" : "mt-6"}>
+        {children}
+      </div>
     </div>
   );
 }

@@ -70,7 +70,7 @@ export default function ContactStep({ step }: ContactStepProps) {
           >
             <label
               htmlFor={field.id}
-              className="text-sm font-medium text-text-primary"
+              className={`text-sm font-medium transition-colors duration-200 ${formData[field.id] ? "text-accent" : "text-text-primary"}`}
             >
               {field.label}
               {!field.required && (
@@ -89,7 +89,7 @@ export default function ContactStep({ step }: ContactStepProps) {
                 value={formData[field.id] ?? ""}
                 onChange={(e) => handleChange(field.id, e.target.value)}
                 required={field.required}
-                className="h-12 rounded-[var(--radius-card)] border border-border bg-surface px-4 text-text-primary outline-none transition-colors focus:border-accent appearance-none"
+                className="h-12 rounded-[var(--radius-card)] border-2 border-border bg-surface px-4 text-text-primary outline-none transition-all duration-200 focus:border-accent focus:bg-white focus:ring-2 focus:ring-accent/10 appearance-none"
               >
                 <option value="" disabled>
                   Bitte wählen
@@ -105,7 +105,7 @@ export default function ContactStep({ step }: ContactStepProps) {
                 <select
                   value={formData[`${field.id}_code`] ?? field.options?.[0] ?? ""}
                   onChange={(e) => handleChange(`${field.id}_code`, e.target.value)}
-                  className="h-12 w-28 shrink-0 rounded-[var(--radius-card)] border border-border bg-surface px-3 text-text-primary outline-none transition-colors focus:border-accent appearance-none"
+                  className="h-12 w-28 shrink-0 rounded-[var(--radius-card)] border-2 border-border bg-surface px-3 text-text-primary outline-none transition-all duration-200 focus:border-accent focus:bg-white focus:ring-2 focus:ring-accent/10 appearance-none"
                 >
                   {field.options?.map((opt) => (
                     <option key={opt} value={opt}>{opt}</option>
@@ -117,7 +117,7 @@ export default function ContactStep({ step }: ContactStepProps) {
                   value={formData[field.id] ?? ""}
                   onChange={(e) => handleChange(field.id, e.target.value)}
                   placeholder={field.placeholder}
-                  className="h-12 flex-1 rounded-[var(--radius-card)] border border-border bg-surface px-4 text-text-primary placeholder:text-text-muted outline-none transition-colors focus:border-accent"
+                  className="h-12 flex-1 rounded-[var(--radius-card)] border-2 border-border bg-surface px-4 text-text-primary placeholder:text-text-muted outline-none transition-all duration-200 focus:border-accent focus:bg-white focus:ring-2 focus:ring-accent/10"
                 />
               </div>
             ) : (
@@ -128,7 +128,7 @@ export default function ContactStep({ step }: ContactStepProps) {
                 onChange={(e) => handleChange(field.id, e.target.value)}
                 placeholder={field.placeholder}
                 required={field.required}
-                className="h-12 rounded-[var(--radius-card)] border border-border bg-surface px-4 text-text-primary placeholder:text-text-muted outline-none transition-colors focus:border-accent"
+                className="h-12 rounded-[var(--radius-card)] border-2 border-border bg-surface px-4 text-text-primary placeholder:text-text-muted outline-none transition-all duration-200 focus:border-accent focus:bg-white focus:ring-2 focus:ring-accent/10"
               />
             )}
           </motion.div>
