@@ -14,35 +14,48 @@ export default function Interstitial({ step }: InterstitialProps) {
 
   return (
     <div className="relative flex w-full max-w-xl flex-col items-center text-center overflow-hidden">
-      {/* Atmospheric ghost number behind the layout */}
+      {/* Atmospheric ghost number — truly massive, brand blue */}
       {step.stat_number && (
         <div
           aria-hidden
-          className="pointer-events-none select-none absolute inset-x-0 top-1/2 -translate-y-1/2 flex items-center justify-center font-[family-name:var(--font-display)] font-bold leading-none text-accent opacity-[0.04] text-[clamp(14rem,40vw,22rem)] whitespace-nowrap"
+          className="pointer-events-none select-none absolute inset-x-0 top-1/2 -translate-y-1/2 flex items-center justify-center font-[family-name:var(--font-display)] font-bold leading-none text-accent whitespace-nowrap"
+          style={{ fontSize: "clamp(10rem, 32vw, 20rem)", opacity: 0.045 }}
         >
           {step.stat_number}
         </div>
       )}
 
-      {/* Stat number — foreground */}
+      {/* Stat number — foreground with brand glow */}
       <motion.div
-        className="relative mb-3 font-[family-name:var(--font-display)] text-[clamp(5rem,15vw,9rem)] font-bold leading-none text-accent"
-        initial={{ opacity: 0, scale: 0.75 }}
+        className="relative mb-2 font-[family-name:var(--font-display)] font-bold leading-none"
+        style={{
+          fontSize: "clamp(5.5rem, 16vw, 10rem)",
+          color: "var(--accent)",
+          textShadow: "0 0 60px rgba(17,58,209,0.18)",
+        }}
+        initial={{ opacity: 0, scale: 0.72 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.7, type: "spring", stiffness: 180, damping: 18 }}
+        transition={{ duration: 0.75, type: "spring", stiffness: 160, damping: 16 }}
       >
         {step.stat_number}
       </motion.div>
 
-      {/* Stat label */}
-      <motion.p
-        className="mb-8 text-lg font-medium text-text-primary sm:text-xl"
+      {/* Stat label with accent underline */}
+      <motion.div
+        className="mb-8 flex flex-col items-center gap-2"
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2, duration: 0.4 }}
       >
-        {step.stat_label}
-      </motion.p>
+        <p className="text-lg font-medium text-text-primary sm:text-xl">
+          {step.stat_label}
+        </p>
+        {/* Thin blue accent underline */}
+        <div
+          className="h-[2px] w-12 rounded-full"
+          style={{ background: "linear-gradient(90deg, #113AD1, #5C9DF2)" }}
+        />
+      </motion.div>
 
       {/* Body */}
       <motion.p

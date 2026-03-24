@@ -37,20 +37,20 @@ function ScorePreviewCard({ mounted }: { mounted: boolean }) {
       <div
         className="relative w-full overflow-hidden rounded-[12px] p-8"
         style={{
-          background: "rgba(255,255,255,0.88)",
-          backdropFilter: "blur(14px)",
-          WebkitBackdropFilter: "blur(14px)",
-          border: "1px solid rgba(15,23,42,0.08)",
-          borderTop: "2px solid rgba(17,59,210,0.18)",
+          background: "rgba(255,255,255,0.04)",
+          backdropFilter: "blur(24px)",
+          WebkitBackdropFilter: "blur(24px)",
+          border: "1px solid rgba(255,255,255,0.08)",
+          borderTop: "2px solid rgba(92,157,242,0.50)",
           boxShadow:
-            "0 8px 32px rgba(15,23,42,0.07), 0 1px 4px rgba(15,23,42,0.04)",
+            "0 0 0 1px rgba(17,58,209,0.12), 0 20px 60px rgba(0,0,0,0.40), inset 0 1px 0 rgba(255,255,255,0.06)",
         }}
       >
         {/* Card header */}
         <div className="mb-5 flex items-center justify-between">
           <span
             className="text-[10px] font-semibold uppercase tracking-[0.2em]"
-            style={{ color: "rgba(15,23,42,0.4)" }}
+            style={{ color: "rgba(255,255,255,0.35)" }}
           >
             Lead-Gen-Score
           </span>
@@ -63,7 +63,7 @@ function ScorePreviewCard({ mounted }: { mounted: boolean }) {
                 style={{
                   width: 4,
                   height: 4,
-                  background: "rgba(17,59,210,0.5)",
+                  background: "rgba(92,157,242,0.7)",
                 }}
                 animate={mounted ? { opacity: [0.3, 1, 0.3] } : false}
                 transition={{
@@ -77,20 +77,19 @@ function ScorePreviewCard({ mounted }: { mounted: boolean }) {
           </div>
         </div>
 
-        {/* Thin blue-tinted divider */}
+        {/* Thin divider */}
         <div
           className="mb-6"
-          style={{ height: 1, background: "rgba(17,59,210,0.08)" }}
+          style={{ height: 1, background: "rgba(255,255,255,0.06)" }}
         />
 
-        {/* Score number — sample value with blue radial glow behind it */}
+        {/* Score number */}
         <div className="relative mb-1">
-          {/* Radial glow */}
           <div
             className="pointer-events-none absolute inset-0"
             style={{
               background:
-                "radial-gradient(ellipse 80% 70% at 30% 50%, rgba(17,59,210,0.07) 0%, transparent 70%)",
+                "radial-gradient(ellipse 80% 70% at 30% 50%, rgba(92,157,242,0.08) 0%, transparent 70%)",
             }}
           />
           <div className="flex items-baseline gap-2">
@@ -98,16 +97,16 @@ function ScorePreviewCard({ mounted }: { mounted: boolean }) {
               className="font-[family-name:var(--font-display)] italic leading-none"
               style={{
                 fontSize: "4.5rem",
-                color: "rgba(17,59,210,0.6)",
+                color: "rgba(92,157,242,1)",
                 letterSpacing: "-0.02em",
-                textShadow: "0 0 24px rgba(17,59,210,0.14)",
+                textShadow: "0 0 40px rgba(92,157,242,0.30)",
               }}
             >
               57
             </span>
             <span
               className="text-xl font-light"
-              style={{ color: "rgba(15,23,42,0.25)" }}
+              style={{ color: "rgba(255,255,255,0.20)" }}
             >
               / 100
             </span>
@@ -117,7 +116,7 @@ function ScorePreviewCard({ mounted }: { mounted: boolean }) {
         {/* Beispiel-Score label */}
         <p
           className="mb-6 text-[9px] font-semibold uppercase tracking-[0.18em]"
-          style={{ color: "rgba(17,59,210,0.35)" }}
+          style={{ color: "rgba(92,157,242,0.50)" }}
         >
           Beispiel-Score
         </p>
@@ -131,7 +130,7 @@ function ScorePreviewCard({ mounted }: { mounted: boolean }) {
                 <div className="flex items-center justify-between">
                   <span
                     className="text-xs font-medium tracking-wide"
-                    style={{ color: "rgba(15,23,42,0.4)" }}
+                    style={{ color: "rgba(255,255,255,0.40)" }}
                   >
                     {cat.label}
                   </span>
@@ -144,7 +143,7 @@ function ScorePreviewCard({ mounted }: { mounted: boolean }) {
                 </div>
                 <div
                   className="h-1.5 w-full overflow-hidden rounded-full"
-                  style={{ background: "rgba(15,23,42,0.06)" }}
+                  style={{ background: "rgba(255,255,255,0.06)" }}
                 >
                   <div
                     className="h-full rounded-full"
@@ -159,22 +158,22 @@ function ScorePreviewCard({ mounted }: { mounted: boolean }) {
           })}
         </div>
 
-        {/* Caption row — light blue tint */}
+        {/* Caption row */}
         <div
           className="mt-6 flex items-center gap-2.5 rounded-[6px] px-3 py-2"
-          style={{ background: "rgba(17,59,210,0.04)" }}
+          style={{ background: "rgba(92,157,242,0.06)" }}
         >
           <div
             className="shrink-0 rounded-full"
             style={{
               width: 2,
               height: 16,
-              background: "rgba(17,59,210,0.35)",
+              background: "rgba(92,157,242,0.40)",
             }}
           />
           <p
             className="text-[11px] tracking-wide"
-            style={{ color: "rgba(15,23,42,0.35)" }}
+            style={{ color: "rgba(255,255,255,0.30)" }}
           >
             Dein persönliches Ergebnis nach der Analyse
           </p>
@@ -199,26 +198,60 @@ export default function HeroPage() {
   return (
     <motion.main
       className="relative flex min-h-dvh flex-col overflow-hidden"
-      style={{ background: "var(--background)" }}
+      style={{ background: "#060E1F" }}
       animate={exiting ? { opacity: 0, y: -12 } : { opacity: 1, y: 0 }}
       transition={{ duration: 0.42, ease: [0.4, 0, 0.2, 1] }}
     >
-      {/* Atmospheric radial accent */}
+      {/* ── Atmospheric layers ──────────────────────────── */}
+
+      {/* Electric blue beam from right */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(ellipse 60% 50% at 80% 30%, rgba(17,59,210,0.045) 0%, transparent 70%)",
+            "radial-gradient(ellipse 75% 80% at 105% 50%, rgba(17,58,209,0.55) 0%, rgba(17,58,209,0.15) 45%, transparent 70%)",
         }}
       />
-      {/* Subtle top-edge light */}
+
+      {/* Blue highlight top-right */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(ellipse 40% 35% at 95% 5%, rgba(92,157,242,0.30) 0%, transparent 60%)",
+        }}
+      />
+
+      {/* Orange micro-accent bottom-left */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(ellipse 30% 25% at 0% 100%, rgba(242,139,48,0.12) 0%, transparent 65%)",
+        }}
+      />
+
+      {/* Dot grid */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0"
+        style={{
+          backgroundImage:
+            "radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px)",
+          backgroundSize: "28px 28px",
+        }}
+      />
+
+      {/* Top-edge hairline */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-x-0 top-0 h-px"
         style={{
           background:
-            "linear-gradient(90deg, transparent, rgba(17,59,210,0.25), transparent)",
+            "linear-gradient(90deg, transparent 0%, rgba(92,157,242,0.4) 40%, rgba(92,157,242,0.4) 60%, transparent 100%)",
         }}
       />
 
@@ -230,7 +263,7 @@ export default function HeroPage() {
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
           <Image
-            src="/logos/entityx/entityx_Logo_RGB_Long_Black_HighRes.png"
+            src="/logos/entityx/entityx_Logo_RGB_Long_White_LowRes.png"
             alt="entity x"
             width={120}
             height={32}
@@ -247,7 +280,7 @@ export default function HeroPage() {
           <div className="grid items-center gap-6 lg:grid-cols-[1fr_360px] lg:gap-14 xl:gap-20">
 
             {/* Text column */}
-            <div className="flex flex-col gap-5">
+            <div className="flex flex-col gap-7">
 
               {/* Eyebrow label */}
               <motion.div
@@ -260,31 +293,35 @@ export default function HeroPage() {
                   className="h-px w-8"
                   style={{
                     background:
-                      "linear-gradient(90deg, #113BD2, rgba(17,59,210,0.15))",
+                      "linear-gradient(90deg, #5C9DF2, rgba(92,157,242,0.15))",
                   }}
                 />
-                <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-accent">
+                <span
+                  className="text-[11px] font-semibold uppercase tracking-[0.18em]"
+                  style={{ color: "#5C9DF2" }}
+                >
                   Lead-Gen-Score Analyse
                 </span>
               </motion.div>
 
               {/* Headline */}
               <motion.h1
-                className="font-[family-name:var(--font-display)] italic leading-[1.07] tracking-tight text-text-primary"
+                className="font-[family-name:var(--font-display)] italic leading-[1.07] tracking-tight text-white"
                 style={{ fontSize: "clamp(2.4rem, 4.2vw, 4.4rem)" }}
                 initial={{ opacity: 0, y: 24 }}
                 animate={mounted ? { opacity: 1, y: 0 } : false}
                 transition={{ delay: 0.08, duration: 1, ease: [0.16, 1, 0.3, 1] }}
               >
                 Dein Lead-Gen-System verliert Umsatz.{" "}
-                <span className="text-accent">
+                <span style={{ color: "#94BDF2" }}>
                   Diese Analyse zeigt dir, wo genau.
                 </span>
               </motion.h1>
 
               {/* Subheadline */}
               <motion.p
-                className="max-w-[42ch] text-base leading-relaxed text-text-secondary"
+                className="max-w-[42ch] text-base leading-relaxed"
+                style={{ color: "rgba(255,255,255,0.60)" }}
                 initial={{ opacity: 0, y: 14 }}
                 animate={mounted ? { opacity: 1, y: 0 } : false}
                 transition={{ delay: 0.28, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
@@ -294,29 +331,37 @@ export default function HeroPage() {
 
               {/* CTA */}
               <motion.div
-                className="flex flex-col items-start gap-3"
+                className="flex flex-col items-start gap-5"
                 initial={{ opacity: 0, y: 14 }}
                 animate={mounted ? { opacity: 1, y: 0 } : false}
                 transition={{ delay: 0.42, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
               >
                 <button
                   onClick={handleStart}
-                  className="inline-flex cursor-pointer items-center gap-2.5 rounded-[var(--radius-button)] px-8 py-[14px] text-base font-medium text-white transition-all duration-200 hover:shadow-[0_8px_32px_rgba(17,59,210,0.35)] active:scale-[0.975]"
+                  className="inline-flex cursor-pointer items-center gap-2.5 rounded-[var(--radius-button)] px-8 py-[14px] text-base font-medium text-white transition-all duration-200 active:scale-[0.975]"
                   style={{
                     background: "linear-gradient(135deg, #113BD2 0%, #1e56f0 100%)",
                     boxShadow:
-                      "0 4px 20px rgba(17,59,210,0.22), inset 0 1px 0 rgba(255,255,255,0.12)",
+                      "0 8px 40px rgba(17,58,209,0.50), inset 0 1px 0 rgba(255,255,255,0.12)",
+                  }}
+                  onMouseEnter={(e) => {
+                    (e.currentTarget as HTMLButtonElement).style.boxShadow =
+                      "0 12px 50px rgba(17,58,209,0.65), inset 0 1px 0 rgba(255,255,255,0.12)";
+                  }}
+                  onMouseLeave={(e) => {
+                    (e.currentTarget as HTMLButtonElement).style.boxShadow =
+                      "0 8px 40px rgba(17,58,209,0.50), inset 0 1px 0 rgba(255,255,255,0.12)";
                   }}
                 >
                   Meinen Score berechnen
-                  <span
-                    aria-hidden="true"
-                    className="text-white/70"
-                  >
+                  <span aria-hidden="true" className="text-white/70">
                     →
                   </span>
                 </button>
-                <p className="text-[11px] tracking-[0.14em] uppercase text-text-muted">
+                <p
+                  className="text-[11px] tracking-[0.14em] uppercase"
+                  style={{ color: "rgba(255,255,255,0.35)" }}
+                >
                   Ø 2 Minuten · Kostenfrei · Sofort-Ergebnis
                 </p>
               </motion.div>
@@ -338,22 +383,28 @@ export default function HeroPage() {
         transition={{ delay: 0.75, duration: 0.8 }}
       >
         <div className="mx-auto max-w-6xl px-8 sm:px-12">
-          <div className="border-t border-border py-4">
+          <div
+            className="py-4"
+            style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}
+          >
             <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-between">
-              <span className="text-[10px] font-medium uppercase tracking-[0.18em] text-text-muted/50">
+              <span
+                className="text-[10px] font-medium uppercase tracking-[0.18em]"
+                style={{ color: "rgba(255,255,255,0.25)" }}
+              >
                 Basiert auf der Analyse von 500+ Lead-Gen-Systemen
               </span>
               <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3 sm:flex-nowrap">
                 {TRUST_CLIENTS.map((client, i) => (
                   <motion.div
                     key={client.name}
-                    initial={{ opacity: 0, filter: "brightness(0)" }}
+                    initial={{ opacity: 0 }}
                     animate={
                       mounted
-                        ? { opacity: 0.4, filter: "brightness(0)" }
+                        ? { opacity: 0.30 }
                         : false
                     }
-                    whileHover={{ opacity: 0.8, filter: "brightness(0.2)" }}
+                    whileHover={{ opacity: 0.65 }}
                     transition={{
                       default: {
                         delay: 0.9 + i * 0.06,
@@ -361,7 +412,6 @@ export default function HeroPage() {
                         ease: [0.16, 1, 0.3, 1],
                       },
                       opacity: { duration: 0.2 },
-                      filter: { duration: 0.2 },
                     }}
                   >
                     <Image
@@ -370,6 +420,7 @@ export default function HeroPage() {
                       width={client.width}
                       height={client.height}
                       className="h-[17px] w-auto sm:h-[19px]"
+                      style={{ filter: "brightness(0) invert(1)" }}
                       unoptimized
                     />
                   </motion.div>

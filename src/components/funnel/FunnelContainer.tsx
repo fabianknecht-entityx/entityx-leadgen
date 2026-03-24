@@ -37,7 +37,21 @@ export default function FunnelContainer() {
   return (
     <div className="flex min-h-dvh flex-col">
       {/* Top bar: progress + back + branding */}
-      <div className="sticky top-0 z-10 bg-background shadow-[0_1px_0_var(--border)]">
+      <div
+        className="sticky top-0 z-10 shadow-[0_1px_0_var(--border)]"
+        style={{
+          background: "rgba(238,242,250,0.90)",
+          backdropFilter: "blur(16px)",
+          WebkitBackdropFilter: "blur(16px)",
+        }}
+      >
+        {/* Brand blue gradient stripe — top edge */}
+        <div
+          className="h-[3px] w-full"
+          style={{
+            background: "linear-gradient(90deg, #113AD1 0%, #1E6FD9 35%, #5C9DF2 65%, #94BDF2 100%)",
+          }}
+        />
         <ProgressBar
           progress={progress}
           totalSteps={totalSteps}

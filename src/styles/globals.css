@@ -1,13 +1,21 @@
 @import "tailwindcss";
 
 :root {
-  --background: #F4F6FB;
+  --background: #EEF2FA;
   --foreground: #0F172A;
 
-  /* Brand colors */
-  --accent: #113BD2;
+  /* Brand colors — entity x palette */
+  --accent: #113AD1;
   --accent-hover: #0E2FA8;
-  --accent-muted: rgba(17, 59, 210, 0.10);
+  --accent-muted: rgba(17, 58, 209, 0.09);
+
+  /* Extended brand blues */
+  --blue-mid: #1E6FD9;
+  --blue-light: #5C9DF2;
+  --blue-pale: #94BDF2;
+
+  /* Brand orange accent */
+  --orange-warm: #F28B30;
 
   /* Score gauge colors */
   --score-red: #EF4444;
@@ -17,8 +25,8 @@
 
   /* Surface colors */
   --surface: #FFFFFF;
-  --surface-elevated: #E6ECF5;
-  --border: rgba(15, 23, 42, 0.10);
+  --surface-elevated: #E2EAF6;
+  --border: rgba(15, 23, 42, 0.09);
 
   /* Text */
   --text-primary: #0F172A;
@@ -30,8 +38,15 @@
   --hero-text: #FFFFFF;
   --hero-text-muted: rgba(255, 255, 255, 0.6);
 
+  /* Neutral grays — brand palette */
+  --neutral-100: #F2F2F2;
+  --neutral-200: #D9D9D9;
+  --neutral-400: #BFBFBF;
+  --neutral-600: #737373;
+  --neutral-800: #404040;
+
   /* Radius */
-  --radius-card: 8px;
+  --radius-card: 10px;
   --radius-button: 35px;
 
   /* Fonts */
@@ -49,6 +64,10 @@
   --color-accent: var(--accent);
   --color-accent-hover: var(--accent-hover);
   --color-accent-muted: var(--accent-muted);
+  --color-blue-mid: var(--blue-mid);
+  --color-blue-light: var(--blue-light);
+  --color-blue-pale: var(--blue-pale);
+  --color-orange-warm: var(--orange-warm);
   --color-surface: var(--surface);
   --color-surface-elevated: var(--surface-elevated);
   --color-border: var(--border);
@@ -69,9 +88,18 @@
 }
 
 body {
-  background:
-    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(17, 59, 210, 0.06) 0%, transparent 70%),
-    var(--background);
+  background-color: var(--background);
+  /* Layered brand-color atmosphere baked into body */
+  background-image:
+    /* Dot grid — digital/precision feel */
+    radial-gradient(circle, rgba(17, 58, 209, 0.11) 1px, transparent 1px),
+    /* Brand blue glow — top right */
+    radial-gradient(ellipse 65% 55% at 88% 8%, rgba(17, 58, 209, 0.07) 0%, transparent 65%),
+    /* Light blue — center right */
+    radial-gradient(ellipse 45% 50% at 92% 55%, rgba(92, 157, 242, 0.05) 0%, transparent 60%),
+    /* Orange micro-accent — bottom left */
+    radial-gradient(ellipse 35% 30% at 4% 92%, rgba(242, 139, 48, 0.05) 0%, transparent 65%);
+  background-size: 28px 28px, 100% 100%, 100% 100%, 100% 100%;
   color: var(--foreground);
   font-family: var(--font-body), sans-serif;
 }

@@ -21,10 +21,10 @@ export default function OptionCard({
     <motion.button
       type="button"
       onClick={onClick}
-      className={`group relative w-full cursor-pointer overflow-hidden rounded-[var(--radius-card)] border-2 px-5 py-4 text-left transition-colors duration-200 ${
+      className={`group relative w-full cursor-pointer overflow-hidden rounded-[var(--radius-card)] border px-5 py-4 text-left transition-all duration-200 ${
         selected
-          ? "border-accent bg-accent-muted shadow-[0_4px_16px_rgba(17,59,210,0.12)]"
-          : "border-border bg-surface hover:border-text-secondary hover:shadow-[0_4px_16px_rgba(15,23,42,0.06)]"
+          ? "border-accent/70 bg-accent-muted shadow-[0_0_0_3px_rgba(17,58,209,0.10),0_4px_20px_rgba(17,58,209,0.12)]"
+          : "border-border bg-surface hover:border-[rgba(17,58,209,0.30)] hover:shadow-[0_2px_14px_rgba(17,58,209,0.07)]"
       }`}
       whileTap={{ scale: 0.985 }}
       transition={{ type: "spring", stiffness: 400, damping: 25 }}
@@ -42,12 +42,12 @@ export default function OptionCard({
         <motion.div
           animate={selected ? { scale: 1.05 } : { scale: 1 }}
           transition={{ type: "spring", stiffness: 500, damping: 25 }}
-          className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center border-2 transition-colors duration-200 ${
-            multiSelect ? "rounded" : "rounded-full"
+          className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center border-[1.5px] transition-all duration-200 ${
+            multiSelect ? "rounded-[4px]" : "rounded-full"
           } ${
             selected
-              ? "border-accent bg-accent shadow-[0_0_10px_rgba(17,59,210,0.45)]"
-              : "border-text-muted bg-transparent group-hover:border-text-secondary"
+              ? "border-accent bg-accent shadow-[0_0_12px_rgba(17,58,209,0.40)]"
+              : "border-[rgba(15,23,42,0.22)] bg-transparent group-hover:border-[rgba(17,58,209,0.40)]"
           }`}
         >
           {selected && (
