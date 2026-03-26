@@ -112,6 +112,33 @@ export default function FunnelContainer() {
           </motion.div>
         </AnimatePresence>
       </div>
+
+      {/* Inline footer */}
+      <footer className="border-t border-border px-5 py-4">
+        <div className="flex flex-col items-center gap-2 sm:flex-row sm:justify-between">
+          <p className="text-xs text-text-muted">
+            &copy; {new Date().getFullYear()} entity x GmbH
+          </p>
+          <nav className="flex items-center gap-5">
+            <a
+              href="https://entityx.com/datenschutz/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs text-text-muted transition-colors duration-150 hover:text-text-secondary"
+            >
+              Datenschutz
+            </a>
+            <a
+              href="https://entityx.com/impressum/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs text-text-muted transition-colors duration-150 hover:text-text-secondary"
+            >
+              Impressum
+            </a>
+          </nav>
+        </div>
+      </footer>
     </div>
   );
 }

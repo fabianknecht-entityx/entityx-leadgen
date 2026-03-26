@@ -427,6 +427,35 @@ export default function HeroPage() {
                 ))}
               </div>
             </div>
+            {/* Legal links — seamlessly embedded within the page atmosphere */}
+            <div
+              className="mt-3 flex flex-col items-center gap-3 pt-3 sm:flex-row sm:justify-between"
+              style={{ borderTop: "1px solid rgba(255,255,255,0.04)" }}
+            >
+              <p className="text-[10px]" style={{ color: "rgba(255,255,255,0.20)" }}>
+                &copy; {new Date().getFullYear()} entity x GmbH
+              </p>
+              <nav className="flex items-center gap-5">
+                <a
+                  href="https://entityx.com/datenschutz/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[10px] transition-colors duration-150"
+                  style={{ color: "rgba(255,255,255,0.30)" }}
+                >
+                  Datenschutz
+                </a>
+                <a
+                  href="https://entityx.com/impressum/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[10px] transition-colors duration-150"
+                  style={{ color: "rgba(255,255,255,0.30)" }}
+                >
+                  Impressum
+                </a>
+              </nav>
+            </div>
           </div>
         </div>
       </motion.footer>
